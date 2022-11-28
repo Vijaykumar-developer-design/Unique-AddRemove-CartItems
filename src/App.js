@@ -24,6 +24,7 @@ class App extends Component {
   incrementCartItemQuantity = id => {
     this.setState(prevState => ({
       cartList: prevState.cartList.map(eachCartItem => {
+        // if the incrementing item id in cart then updating it's quantity 
         if (id === eachCartItem.id) {
           const updatedQuantity = eachCartItem.quantity + 1
           return {...eachCartItem, quantity: updatedQuantity}
@@ -35,10 +36,13 @@ class App extends Component {
 
   decrementCartItemQuantity = id => {
     const {cartList} = this.state
+    // checking product in cart whether exist or not
     const productObject = cartList.find(eachCartItem => eachCartItem.id === id)
+    // if quantity > 1 then updating 
     if (productObject.quantity > 1) {
       this.setState(prevState => ({
         cartList: prevState.cartList.map(eachCartItem => {
+          // if product exist updating it's quantity 
           if (id === eachCartItem.id) {
             const updatedQuantity = eachCartItem.quantity - 1
             return {...eachCartItem, quantity: updatedQuantity}
@@ -47,6 +51,7 @@ class App extends Component {
         }),
       }))
     } else {
+      // if quanity ===0 then removing from cart by passing it's id to remove Item method 
       this.removeCartItem(id)
     }
   }
@@ -62,14 +67,16 @@ class App extends Component {
 
   addCartItem = product => {
     const {cartList} = this.state
+    // checking product in cart whether exist or not 
     const productObject = cartList.find(
       eachCartItem => eachCartItem.id === product.id,
     )
-
+// if product exist increasing quantity only and adding to cart
     if (productObject) {
       this.setState(prevState => ({
         cartList: prevState.cartList.map(eachCartItem => {
           if (productObject.id === eachCartItem.id) {
+            // incrasing quanitity
             const updatedQuantity = eachCartItem.quantity + product.quantity
 
             return {...eachCartItem, quantity: updatedQuantity}
@@ -79,6 +86,7 @@ class App extends Component {
         }),
       }))
     } else {
+      // if product does not exist then adding it to cart directly 
       const updatedCartList = [...cartList, product]
 
       this.setState({cartList: updatedCartList})

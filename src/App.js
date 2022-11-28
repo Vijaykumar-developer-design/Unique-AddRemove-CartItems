@@ -24,7 +24,7 @@ class App extends Component {
   incrementCartItemQuantity = id => {
     this.setState(prevState => ({
       cartList: prevState.cartList.map(eachCartItem => {
-        // if the incrementing item id in cart then updating it's quantity 
+        // if the incrementing item id in cart then updating it's quantity  
         if (id === eachCartItem.id) {
           const updatedQuantity = eachCartItem.quantity + 1
           return {...eachCartItem, quantity: updatedQuantity}
